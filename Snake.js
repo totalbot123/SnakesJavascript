@@ -17,15 +17,15 @@ Snake.prototype.draw = function() {
 
 Snake.prototype.move = function() {
 	if (this.posX >= width) {
-		this.posX = 0 - this.size + 1;
+		this.posX = canvasX + 1;
 	}
 	if (this.posY >= height) {
-		this.posY = 0 - this.size + 1;
+		this.posY = canvasY + 1;
 	}
-	if (this.posX + this.size <= 0) {
+	if (this.posX + this.size <= canvasX + snakeBodyWidth) {
 		this.posX = width;
 	}
-	if (this.posY + this.size <= 0) {
+	if (this.posY + this.size <= canvasY + snakeBodyWidth) {
 		this.posY = height;
 	}
 	
@@ -65,4 +65,14 @@ Snake.prototype.updateDirection = function(C) {
 			break;
 		
 	}
+}
+
+Snake.prototype.clone = function() {
+	if (this instanceof Object) {
+        copy = new Snake();
+        for (var attr in this) {
+            if (this.hasOwnProperty(attr)) copy[attr] = this[attr];
+        }
+        return copy;
+    }
 }

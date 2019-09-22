@@ -16,16 +16,16 @@ Snake.prototype.draw = function() {
 }
 
 Snake.prototype.move = function() {
-	if (this.posX >= width) {
-		this.posX = canvasX + 1;
+	if (this.posX > width + canvasX - this.size) {
+		this.posX = canvasX;
+	} 
+	else if (this.posY > height + canvasY - this.size) {
+		this.posY = canvasY;
 	}
-	if (this.posY >= height) {
-		this.posY = canvasY + 1;
-	}
-	if (this.posX + this.size <= canvasX + snakeBodyWidth) {
+	else if (this.posX < canvasX) {
 		this.posX = width;
 	}
-	if (this.posY + this.size <= canvasY + snakeBodyWidth) {
+	else if (this.posY < canvasY) {
 		this.posY = height;
 	}
 	

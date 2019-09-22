@@ -22,7 +22,7 @@ function handleKeyPressed(e) {
 	}
 
 	currentClick = new Date();
-	if (currentClick.getTime() - previousCommandTime.getTime() < 6) {
+	if (currentClick.getTime() - previousCommandTime.getTime() < 10) {
 		return;
 	}
 	previousCommandTime = new Date();

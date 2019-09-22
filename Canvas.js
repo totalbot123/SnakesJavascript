@@ -1,7 +1,9 @@
 var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
-var width = (canvas.width = 70 * 15);
-var height = (canvas.height = 35 * 15);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+var width = 70 * 15;
+var height = 35 * 15;
 var canvasX = fixPosition((window.innerWidth - width) / 2);
 var canvasY = fixPosition((window.innerHeight - height) / 2);
 

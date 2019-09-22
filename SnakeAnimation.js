@@ -7,7 +7,6 @@ var snakeBody = [snakeHead];
 var commandQueue = [];
 
 function animateSnake() {
-	updateHeadVelocity();
 	snakeBody[0].draw()
 	snakeBody[0].move();
 	for (i = 1; i < snakeBody.length; ++i) {
@@ -26,24 +25,18 @@ function animateSnake() {
 		if (snakeBody[i].visible) {
 			snakeBody[i].draw();
 			snakeBody[i].move();
-
-			if (Math.abs(snakeBody[i].posX - snakeBody[0].posX)%snakeBodyWidth != 0 && snakeBody[i-1].visible) {
-				snakeBody[i].posX = snakeBody[i - 1].posX;
-			}
-			if (Math.abs(snakeBody[i].posY - snakeBody[0].posY)%snakeBodyWidth != 0 && snakeBody[i-1].visible) {
-				snakeBody[i].posY = snakeBody[i - 1].posY;
-			}
 		}
 	}
+	updateHeadVelocity();
 }
 
 function updateHeadVelocity() {
+	if (commandQueue.length > 2) {
+		commandQueue.length = 2;
+	}
 	if (commandQueue.length > 0 && snakeBody[0].posX%snakeBodyWidth == 0 && snakeBody[0].posY%snakeBodyWidth == 0) {
 		snakeBody[0].updateDirection(commandQueue.shift());
 	}
-}
-
-function snakeBodyFixup() {
 }
 
 function detectSnakeCollision() {

@@ -8,7 +8,7 @@ var canvasX = fixPosition((window.innerWidth - width) / 2);
 var canvasY = fixPosition((window.innerHeight - height) / 2);
 
 function drawCanvas() {
-	ctx.fillStyle = "#6da0a2";
+	ctx.fillStyle = "#000000";
 	ctx.fillRect(canvasX, canvasY, width, height);
 }
 

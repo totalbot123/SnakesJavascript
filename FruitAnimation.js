@@ -8,13 +8,13 @@ function drawFruit() {
 }
 
 function spawnFruit() {
-	let posX = Math.round(Math.random() * width - snakeBodyWidth) + canvasX;
-	let posY = Math.round(Math.random() * height - snakeBodyWidth) + canvasY;
+	let posX;
+	let posY;
+	do {
+		posX = Math.round(Math.random() * (width - snakeBodyWidth)) + canvasX;
+		posY = Math.round(Math.random() * (height - snakeBodyWidth)) + canvasY;
+	} while (fruitCollidesWithSnake(posX, posY));
 
-	while (fruitCollidesWithSnake(posX, posY)) {
-		posX = Math.round(Math.random() * width - snakeBodyWidth) + canvasX;
-		posY = Math.round(Math.random() * height - snakeBodyWidth) + canvasY;
-	}
 	fruit = new Fruit(fixPosition(posX), fixPosition(posY), snakeBodyWidth);
 }
 

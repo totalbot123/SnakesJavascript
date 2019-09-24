@@ -2,30 +2,24 @@ var snakeBodyWidth = 15;
 var snakeSpeed = snakeBodyWidth / 5;
 
 var snakeHead = new Snake(fixPosition(width / 2), fixPosition(height / 2), snakeSpeed, snakeBodyWidth, "rose");
-snakeHead.visible = true;
 var snakeBody = [snakeHead];
 var commandQueue = [];
 
 function animateSnake() {
-	snakeBody[0].draw()
-	snakeBody[0].move();
+	snakeHead.draw()
+	snakeHead.move();
 	for (i = 1; i < snakeBody.length; ++i) {
-		ridiculustest2 =
+		bodyPartsCollide =
 			Math.abs(snakeBody[i].posX - snakeBody[i - 1].posX) >= snakeBody[i].size ||
 			Math.abs(snakeBody[i].posY - snakeBody[i - 1].posY) >= snakeBody[i].size;
 
-		if (ridiculustest2) {
+		if (bodyPartsCollide) {
 			snakeBody[i].velX = snakeBody[i - 1].velX;
 			snakeBody[i].velY = snakeBody[i - 1].velY;
-			if (!snakeBody[i].visible) {
-				snakeBody[i].visible = true;
-			}
-		}
+		} 
 
-		if (snakeBody[i].visible) {
-			snakeBody[i].draw();
-			snakeBody[i].move();
-		}
+		snakeBody[i].draw();
+		snakeBody[i].move();
 	}
 	updateHeadVelocity();
 }
@@ -34,8 +28,8 @@ function updateHeadVelocity() {
 	if (commandQueue.length > 2) {
 		commandQueue.length = 2;
 	}
-	if (commandQueue.length > 0 && snakeBody[0].posX%snakeBodyWidth == 0 && snakeBody[0].posY%snakeBodyWidth == 0) {
-		snakeBody[0].updateDirection(commandQueue.shift());
+	if (commandQueue.length > 0 && snakeHead.posX%snakeBodyWidth == 0 && snakeHead.posY%snakeBodyWidth == 0) {
+		snakeHead.updateDirection(commandQueue.shift());
 	}
 }
 
@@ -43,9 +37,8 @@ function detectSnakeCollision() {
 	magicalNumber = snakeBodyWidth - snakeSpeed - 1;
 	for (i = 2; i < snakeBody.length; ++i) {
 		if (
-			Math.abs(snakeBody[i].posX - snakeBody[0].posX) < magicalNumber &&
-			Math.abs(snakeBody[i].posY - snakeBody[0].posY) < magicalNumber &&
-			snakeBody[i].visible && !snakeInGrowth()
+			Math.abs(snakeBody[i].posX - snakeHead.posX) < magicalNumber &&
+			Math.abs(snakeBody[i].posY - snakeHead.posY) < magicalNumber && !snakeInGrowth()
 		) {
 			return true;
 		}

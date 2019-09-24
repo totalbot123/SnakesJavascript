@@ -7,7 +7,6 @@ function Snake(posX, posY, speed, size, color) {
 	this.size = size;
 	this.color = color;
 	this.direction = 'R';
-	this.visible = false;
 }
 
 Snake.prototype.draw = function() {
@@ -23,10 +22,10 @@ Snake.prototype.move = function() {
 		this.posY = canvasY;
 	}
 	else if (this.posX < canvasX) {
-		this.posX = width;
+		this.posX = width + canvasX - this.size;
 	}
 	else if (this.posY < canvasY) {
-		this.posY = height;
+		this.posY = height + canvasY - this.size;
 	}
 	
 	this.posX += this.velX;

@@ -6,11 +6,12 @@ function loop() {
 	drawCanvas();
 	drawFruit();
 	animateSnake();
-	eatFruit();
+	checkEatFruit();
 
 	var detected = detectSnakeCollision();
 	if (detected) {
-		return;
+		snakeHead = new Snake(fixPosition(width / 2), fixPosition(height / 2), snakeSpeed, snakeBodyWidth, "rose")
+		snakeBody.length = 0;
 	} else {
 		requestAnimationFrame(loop);
 	}
